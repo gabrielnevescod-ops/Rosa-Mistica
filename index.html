@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+        rel="stylesheet">
+    <title>Rosa Mistica</title>
+</head>
+
+<body>
+
+    <header class="header">
+        <section>
+
+            <div class="logo-container">
+
+                <a href="index.html" class="logo">
+                    <img class="logoflor" src="./logo-flor.png" alt="">
+                </a>
+
+                <div class="logo-textos">
+                    <h4> Rosa Mística</h4>
+                    <p>Bruna Witcoski</p>
+                </div>
+            </div>
+
+           
+
+            <nav class="navbar">
+                <a href="inicio" class="ativo" data-link>Início</a>
+                <a href="poesias" data-link>Poesias</a>
+                <a href="sobre" data-link>Sobre</a>
+                <a href="contato" data-link>Contato</a>
+            </nav>
+
+           <div class="icons">
+                <a href="poesias" data-link title="Buscar Poesias">
+                    <img class="lupaimg" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/search--v1.png" alt="Ícone de pesquisa" />
+                </a>
+            </div>
+        </section>
+    </header>
+
+    <div id="main-content">
+
+        <main class="segundadiv">
+
+            <div class="tag-novidades">
+
+                <span class="icone-brilho">✨</span>
+                <span class="novaspoesias">Novas poesias toda semana</span>
+            </div>
+            <h1 class="texto-principal">
+                Que meu espírito seja anunciador  <br>
+                <span class="versos">de belezas e de verdades.</span>
+            </h1>
+           
+
+            <div class="classebotoes">
+                <a href="poesias" class="botaoUM" data-link>Ler Poesias</a>
+                <a href="sobre" class="botaoDois" data-link>Sobre a autora</a>
+            </div>
+        </main>
+
+        <section class="MinhasSentimentos">
+
+            <div class="divMinhasPoesias">
+                <h2>Minhas Poesias</h2>
+                <p>Sentimentos traduzidos em palavras</p>
+            </div>
+
+            <div class="container-dos-cards" id="palco-dos-cards">
+            </div>
+
+            <div class="ultimobotao">
+                <a href="poesias" class="botao-ver-todas" data-link>Ver todas as poesias</a>
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer class="rodape-site">
+
+        <div class="rodape-colunas">
+
+            <div class="divBlog">
+                <div class="coluna coluna-sobre">
+                    <h3 class="titulo-rodape">Sobre o Blog</h3>
+                    <p class="texto-rodape">Um espaço dedicado a levar ao mundo um pouco de mim. Aqui compartilho meus versos, emoções e reflexões. </p>
+                </div>
+            </div>
+
+          
+            <div class="coluna">
+
+                <h3 class="titulo-rodape">Conecte-se</h3>
+                <p class="texto-rodape">Leve a poesia com você. Acompanhe meu trabalho, adquira minhas obras ou escreva para mim.</p>
+
+                <div class="rede-sociais">
+                    <a href="https://www.instagram.com/brunawitcoski/" target="_blank" rel="noopener noreferrer">
+                        <img src="./instagramLogo.png" alt="perfil no instagram" class="icone-social">
+                    </a>
+
+                    <a href="https://www.besourobox.com.br/poesia/rosa-mistica?srsltid=AfmBOorzfjHnuQv9adCkdUt1z-p2J_mpanWa0Dh1vZ4C74z6bwQbMqmH" target="_blank" rel="noopener noreferrer">
+                        <img src="./logoLoja.png" alt="icone-loja" class="icone-social">
+                    </a>
+
+                    <a href="contato" data-link>
+                        <img src="./logoEmail.png" alt="conta-Email" class="icone-social">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <hr class="linha-divisoria">
+
+        <div class="rodape-creditos">
+            <p>© 2026 Rosa Mística. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="notificacao-toast" class="toast-escondido">
+        <span class="toast-icone">✨</span>
+        <span id="toast-mensagem">Mensagem enviada!</span>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
