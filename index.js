@@ -318,7 +318,7 @@ const paginas = {
                     <div class="item-inspiracao">
                         <div class="icone-inspiracao">📚</div>
                         <h4>Literatura</h4>
-                        <p>"Grandes poetas como Guimarães Rosa e Mário Quintana me guiam."</p>
+                        <p>"Grandes poetas como Guimarães Rosa e Mário Quintana me inspiram"</p>
                     </div>
                 </div>
             </section>
