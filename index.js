@@ -1,5 +1,8 @@
 
-// 1. O "Banco de Dados" das suas páginas (coloquei o conteúdo resumido aqui para facilitar a leitura)
+// Desativa o pulo automático da barra de rolagem do navegador
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
 // 1. O "Banco de Dados" das suas páginas (Agora com o HTML completo!)
 // ==========================================
 // 1. BANCO DE DADOS DAS POESIAS
@@ -460,7 +463,7 @@ function navegarPara(idPagina, salvarHistorico = true) {
 
         window.scrollTo(0, 0);
 
-    }, 150);
+    }, 300);
 }
 
 // Observador de cliques globais do site
@@ -521,7 +524,7 @@ function abrirPoesia(idDaPoesia, salvarHistorico = true) {
         atualizarMenu("poesias");
         window.scrollTo(0, 0);
 
-    }, 150);
+    }, 300);
 }
 
 // Atualiza o menu de navegação
