@@ -429,11 +429,16 @@ const paginas = {
 // 3. FUNÇÕES DE NAVEGAÇÃO E LÓGICA
 // ==========================================
 
-// Função principal de troca de páginas (ATUALIZADA)
-function navegarPara(idPagina) {
+// Função principal de troca de páginas (ATUALIZADA COM HISTORY API)
+function navegarPara(idPagina, salvarHistorico = true) {
     const container = document.getElementById("main-content");
 
     if (!paginas[idPagina]) idPagina = "inicio";
+
+    // O SEGREDO: Salva a navegação no histórico do celular
+    if (salvarHistorico) {
+        history.pushState({ pagina: idPagina }, "", "#" + idPagina);
+    }
 
     container.classList.add("escondido");
 
@@ -441,21 +446,18 @@ function navegarPara(idPagina) {
         container.innerHTML = paginas[idPagina];
         container.classList.remove("escondido");
 
-        // Mantém a Navbar acesa corretamente. Se for leitura, acende "poesias"
+        // Mantém a Navbar acesa corretamente
         const paginaAtiva = idPagina === 'leitura' ? 'poesias' : idPagina;
         atualizarMenu(paginaAtiva);
 
-        // Se a página que acabou de aparecer for 'inicio' ou 'poesias', desenha os cards.
         if (idPagina === "inicio" || idPagina === "poesias") {
             renderizarCards();
         }
 
-        // Se a página for 'poesias', ativa o escutador da barra de pesquisa
         if (idPagina === "poesias") {
             ativarEscutadorDeBusca();
         }
 
-        // >>> PUXA A TELA PARA O TOPO SEMPRE QUE MUDAR DE PÁGINA <<<
         window.scrollTo(0, 0);
 
     }, 150);
@@ -477,27 +479,23 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarCards();
 });
 
-// =========================================================================
-// A PARTIR DAQUI, CONTINUE COM AS SUAS FUNÇÕES ANTIGAS NORMALMENTE:
-// function abrirPoesia(idDaPoesia) { ... }
-// =========================================================================
-// Função para abrir uma poesia específica (CORRIGIDA - Sem piscar e com rolagem)
-function abrirPoesia(idDaPoesia) {
+// Função para abrir uma poesia específica (ATUALIZADA COM HISTORY API)
+function abrirPoesia(idDaPoesia, salvarHistorico = true) {
     const poesiaEscolhida = minhasPoesias[idDaPoesia];
 
-    if (!poesiaEscolhida) return; // Se a poesia não existir, não faz nada
+    if (!poesiaEscolhida) return; 
+
+    // O SEGREDO: Salva a leitura dessa poesia específica no histórico
+    if (salvarHistorico) {
+        history.pushState({ pagina: 'leitura', id: idDaPoesia }, "", "#poesia-" + idDaPoesia);
+    }
 
     const container = document.getElementById("main-content");
-
-    // 1. Apaga a tela (inicia a transição suave)
     container.classList.add("escondido");
 
-    // 2. Espera a tela sumir (150ms) e faz todo o trabalho nos bastidores
     setTimeout(() => {
-        // Coloca o molde de leitura na tela
         container.innerHTML = paginas["leitura"];
 
-        // Preenche os dados do poema IMEDIATAMENTE (sem outro setTimeout)
         const palcoPoesia = document.getElementById("palco-da-poesia");
 
         if (palcoPoesia) {
@@ -516,17 +514,11 @@ function abrirPoesia(idDaPoesia) {
                         ${poesiaEscolhida.versos}
                     </div>
                 </div>
-                
             `;
         }
 
-        // 3. Revela a tela com a poesia já perfeitamente montada
         container.classList.remove("escondido");
-
-        // 4. Mantém a Navbar acesa corretamente em "Poesias"
         atualizarMenu("poesias");
-
-        // >>> PUXA A TELA PARA O TOPO PARA LER DO INÍCIO <<<
         window.scrollTo(0, 0);
 
     }, 150);
@@ -543,15 +535,11 @@ function atualizarMenu(idPagina) {
     });
 }
 
-// Observador de cliques globais do site
-document.addEventListener("click", e => {
-    const elementoClicado = e.target.closest('[data-link]');
-
-    if (elementoClicado) {
-        e.preventDefault();
-        const destino = elementoClicado.getAttribute("href").replace(".html", "");
-        navegarPara(destino);
-    }
+// Garante que os cards apareçam na primeira vez que o site abrir
+document.addEventListener("DOMContentLoaded", () => {
+    // Grava que o usuário acabou de entrar na página inicial
+    history.replaceState({ pagina: 'inicio' }, "", "#inicio");
+    renderizarCards();
 });
 
 // ==========================================
@@ -694,4 +682,21 @@ function ativarEscutadorDeBusca() {
     }
 }
 
+// O GATILHO DA SETA DO CELULAR: Escuta o botão de voltar do navegador/celular
+window.addEventListener("popstate", (e) => {
+    const estado = e.state;
+
+    // Se existe um histórico salvo
+    if (estado) {
+        if (estado.pagina === 'leitura') {
+            // O "false" avisa a função para não tentar salvar o histórico de novo
+            abrirPoesia(estado.id, false); 
+        } else {
+            navegarPara(estado.pagina, false);
+        }
+    } else {
+        // Se ele voltou tudo até a primeira página
+        navegarPara('inicio', false);
+    }
+});
 
